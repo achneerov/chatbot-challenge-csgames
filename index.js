@@ -2,8 +2,8 @@ const chatForm = get('form');
 const chatInput = get('input');
 const chatBox = get('main');
 
-appendMessage('bot', 'This is a bot bubble');
-appendMessage('user', 'This is a user bubble');
+// appendMessage('bot', 'This is a bot bubble');
+// appendMessage('user', 'This is a user bubble');
 
 chatForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -12,8 +12,14 @@ chatForm.addEventListener('submit', event => {
   
   appendMessage('user', text);
   chatInput.value = '';
-  ai_message = query(text);
-  appendMessage('AI', query(text));
+  query({
+      "inputs": "How are you today",
+      "parameters": {}
+  }).then((response) => {
+    appendMessage('bot', JSON.stringify(response) );
+  });
+
+  
   
 });
 
@@ -47,11 +53,10 @@ async function query(data) {
 	return result;
 }
 
-query({
-    "inputs": "How are you today",
-    "parameters": {}
-}).then((response) => {
-	console.log(JSON.stringify(response));
-});
-
+// query({
+//     "inputs": "How are you today",
+//     "parameters": {}
+// }).then((response) => {
+// 	console.log(JSON.stringify(response));
+// });
 
