@@ -12,9 +12,9 @@ chatForm.addEventListener('submit', event => {
   
   appendMessage('user', text);
   chatInput.value = '';
-  a = query(text)
-  // appendMessage("Robot", a)
-  appendMessage('AI', a);
+  ai_message = query(text);
+  appendMessage('AI', query(text));
+  
 });
 
 function appendMessage(side, text) {
@@ -25,8 +25,6 @@ function appendMessage(side, text) {
   chatBox.insertAdjacentHTML('beforeend', bubble);
   chatBox.scrollTop += 500;
 }
-
-// https://catfact.ninja/fact
 
 // Utils
 function get(selector, root = document) {
@@ -50,9 +48,10 @@ async function query(data) {
 }
 
 query({
-    "inputs": "This is the text sent to the model",
+    "inputs": "How are you today",
     "parameters": {}
 }).then((response) => {
 	console.log(JSON.stringify(response));
 });
+
 
