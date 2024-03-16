@@ -2,8 +2,6 @@ const chatForm = get('form');
 const chatInput = get('input');
 const chatBox = get('main');
 
-// appendMessage('bot', 'This is a bot bubble');
-// appendMessage('user', 'This is a user bubble');
 
 chatForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -13,10 +11,25 @@ chatForm.addEventListener('submit', event => {
   appendMessage('user', text);
   chatInput.value = '';
   query({
-      "inputs": "How are you today",
+      "inputs": "how big is the world",
       "parameters": {}
   }).then((response) => {
-    appendMessage('bot', JSON.stringify(response) );
+    t = JSON.stringify(response)
+    t2 = ""
+    flag = true
+    for (let i = 0; i < t.length; i++) {
+      if (i > 35){
+        if (t[i] == "\\"){
+          flag = false
+        }
+        if (flag == true){
+          t2 = t2.concat(t[i])
+        }
+      }
+    }
+    
+    appendMessage('bot', t2);
+    console.log(t2)
   });
 
   
@@ -53,10 +66,4 @@ async function query(data) {
 	return result;
 }
 
-// query({
-//     "inputs": "How are you today",
-//     "parameters": {}
-// }).then((response) => {
-// 	console.log(JSON.stringify(response));
-// });
 
